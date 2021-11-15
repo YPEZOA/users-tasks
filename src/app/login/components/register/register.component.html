@@ -1,0 +1,22 @@
+<div class="container-form_register">
+  <form autocomplete="off" [formGroup]="registerForm">
+    <h1 class="register-title mb-5">Registrate!</h1>
+    <div class="form-group">
+      <label for="email">Email <span class="required-field">*</span></label>
+      <input type="email" name="" id="email" class="form-control" placeholder="ej: holamundo@gmail.com" formControlName="email" [ngClass]="{ 'error-color': validateFields('email') }">
+    </div>
+    <div class="form-group">
+      <label for="username">Nombre de usuario <span class="required-field">*</span></label>
+      <input type="text" name="" id="username" class="form-control" placeholder="Ingresa nombre de usuario" formControlName="user" [ngClass]="{ 'error-color': validateFields('user') }">
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña <span class="required-field">*</span></label>
+      <input type="password" name="" id="password" class="form-control" placeholder="Mínimo 8 caracteres" formControlName="password" [ngClass]="{ 'error-color': validateFields('password') }" minlength="
+      8">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" (click)="onSubmitRegister($event)">Registrarse</button>
+      <button [routerLink]="['/auth/login']" class="btn btn-primary">Volver</button>
+    </div>
+  </form>
+</div>

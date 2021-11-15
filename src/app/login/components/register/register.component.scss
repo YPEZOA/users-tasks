@@ -1,0 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;500&family=Poppins:wght@300&display=swap");
+
+.container-form_register {
+  font-family: "Poppins", sans-serif;
+  form {
+    background-color: #f2f2f2;
+    border-radius: 20px;
+    padding: 40px;
+    padding-top: 4em;
+    padding-bottom: 4em;
+    width: 20%;
+    margin: auto;
+  }
+  .register-title {
+    font-weight: 900;
+  }
+  .form-group {
+    margin: auto;
+    margin-bottom: 10px;
+    label {
+      color: grey;
+    }
+    .btn {
+      margin-top: 15px;
+      width: 100%;
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
+    .required-field {
+      color: red;
+    }
+    .form-control {
+      padding: 10px;
+      background-color: #f2f2f2;
+      margin-bottom: 20px;
+      font-size: 14px;
+      border: none;
+      border-bottom: 2px solid #cccc;
+      border-radius: 0;
+      &:focus {
+        box-shadow: none;
+        outline: none;
+        border-color: lightblue;
+      }
+    }
+  }
+}
+
+.error-color {
+  border-color: red !important;
+  background-color: #f3cfcf !important;
+}

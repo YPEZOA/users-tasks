@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;500&family=Poppins:wght@300&display=swap");
+
+.navbar {
+  background-color: #00000073;
+  font-family: "Poppins", sans-serif;
+  height: 100px;
+  a {
+    text-decoration: none;
+    margin-right: 4em;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
