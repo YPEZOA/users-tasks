@@ -3,10 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {MainComponent} from './components/main/main.component';
 import {MyTasksComponent} from './components/my-tasks/my-tasks.component';
-import {TasksComponent} from './components/all-tasks/tasks.component';
+import {ProfileComponent} from './components/profile/profile.component';
 import {RegisterComponent} from './components/register/register.component';
 import {AuthGuard} from './guards/auth.guard';
-import {UpdateUserComponent} from './components/update-user/update-user.component';
 
 const routes: Routes = [
   {
@@ -28,16 +27,10 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'tasks',
-        component: TasksComponent,
+        path: 'profile',
+        component: ProfileComponent,
         canLoad: [AuthGuard],
         canActivate: [AuthGuard],
-      },
-      {
-        path: 'update/:id',
-        component: UpdateUserComponent,
-        canLoad: [AuthGuard],
-        canActivate: [AuthGuard]
       },
       {
         path: '**',

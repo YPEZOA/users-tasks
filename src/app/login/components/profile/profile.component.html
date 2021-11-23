@@ -1,0 +1,30 @@
+<app-header [userData]="userData"></app-header>
+<div class="table-responsive">
+  <div class="container-data_user">
+    <img [src]="userData.avatar | userImage" alt="image">
+    <div class="info">
+      <span class="username">Usuario: {{ userData.userName }}</span>
+      <span class="user-email">Email: {{ userData.email }}</span>
+      <span class="tasks">Tareas: <small class="amount">{{ tasks?.length }}</small></span>
+    </div>
+  </div>
+  <table class="table table-hover table-bordered">
+    <caption>Lista de tareas</caption>
+    <thead class="bg-secondary text-white">
+      <tr>
+        <th>Usuario</th>
+        <th>Título de la tarea</th>
+        <th>Descripción</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-light" *ngFor="let task of tasks">
+        <td class="user">{{ task.user | json }}</td>
+        <td class="title">{{ task.title }}</td>
+        <td class="description">{{ task.description }}</td>
+        <td class="complete">{{ task.complete ? 'Completada' : 'Sin terminar' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
