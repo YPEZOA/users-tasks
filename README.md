@@ -1,4 +1,8 @@
 # LoginApp
+- Clone or download this repo
+- Run npm install or yarn install
+- In loginServer folder run node or nodemon src/index.js
+- Run ng serve to run app
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.0.
 
