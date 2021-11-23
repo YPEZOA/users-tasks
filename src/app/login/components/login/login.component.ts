@@ -14,6 +14,7 @@ import { throwError } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  showLoading!: boolean;
   userData!: any[];
   validLogin!: boolean;
 
@@ -42,31 +43,35 @@ export class LoginComponent implements OnInit {
     const { user, password } = this.form.value;
     if (this.validLogin) {
       this.authService
-        .userLogin(user, password)
-        .pipe(
-          catchError((err: HttpErrorResponse) => {
-            this.validLogin = false;
-            Swal.fire({
-              icon: 'error',
-              text: err.error.message,
-              timer: 2000,
-              backdrop: false,
-              showConfirmButton: false,
-            });
-            return throwError(err);
-          })
-        )
-        .subscribe((resp: any) => {
-          if (resp.status === 1) {
-            resp.userData ? (this.userData = resp.userData) : null;
-            sessionStorage.setItem('token', resp.token);
-            sessionStorage.setItem(
-              'userData',
-              JSON.stringify(this.userData) || ''
-            );
-            this.router.navigate(['/auth/profile']);
-          }
-        });
+      .userLogin(user, password)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          this.validLogin = false;
+          Swal.fire({
+            icon: 'error',
+            text: err.error.message,
+            timer: 1500,
+            backdrop: false,
+            showConfirmButton: false,
+          });
+          return throwError(err);
+        })
+      )
+      .subscribe((resp: any) => {
+        if (resp.ok === true) {
+          this.showLoading = true
+          resp.userData ? (this.userData = resp.userData) : null;
+          sessionStorage.setItem('token', resp.token);
+          sessionStorage.setItem(
+            'userData',
+            JSON.stringify(this.userData) || ''
+          );
+          setTimeout(() => {
+          this.router.navigate(['/auth/tasks']);
+          this.showLoading = false;
+          }, 2500)
+        }
+      });
     } else {
       Swal.fire({
         icon: 'error',

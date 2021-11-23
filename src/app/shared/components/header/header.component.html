@@ -1,4 +1,14 @@
 <nav class="navbar fixed-top">
-  <div class="navbar-brand"><a href="#!">Tareas!</a></div>
-  <a [routerLink]="['/auth/my-tasks']" class="text-white">Revisa aquí tus tareas <strong>{{ userData?.userName }}</strong></a>
+  <div class="navbar-brand"><a [routerLink]="['/auth/tasks']">Task app|</a></div>
+  <ul>
+    <li *ngIf="userData?.userId || userData?._id">
+      <a [routerLink]="['/auth/my-tasks']" class="text-white">Revisa aquí tus tareas <strong>{{ userData?.user }}</strong></a>
+    </li>
+    <li *ngIf="backToTasks">
+      <a [routerLink]="['/auth/tasks']" class="text-white">Tareas del grupo <strong>{{ userData?.user }}</strong></a>
+    </li>
+    <li *ngIf="userData?.user || backToTasks">
+      <a class="text-white" [routerLink]="['/auth/login']" (click)="logout($event)">Salir</a> 
+    </li>
+  </ul>
 </nav>

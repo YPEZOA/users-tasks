@@ -1,4 +1,67 @@
-<app-header></app-header>
-<div class="my-task_container">
-  <h1>Todas mis tareas</h1>
-</div>
+<app-header [backToTasks]="backToTasks"></app-header>
+<section class="my-task_container">
+  <h1 class="title" *ngIf="myTasks?.length">MIS TAREAS</h1>
+  <button
+      class="btn btn-info mb-3 text-white"
+      (click)="onOpenModalRegister(registerModal)"
+      >
+      <i class="fas fa-plus"></i> Agregar tarea
+  </button>
+  <h1 class="not-tasks" *ngIf="!myTasks?.length">¿ Qué esperar para realizar tareas ?</h1>
+  <div class="container-table" *ngIf="myTasks?.length">
+    <i class="fas fa-circle-notch fa-spin spinner" *ngIf="showSpinner"></i>
+    <table class="table tasks-table table-stripped">
+      <thead>
+        <tr>
+          <th>Tarea</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let task of myTasks">
+        <tr [ngClass]="{'tashed': task.complete }">
+          <td>{{ task.title }}</td>
+          <td>{{ task.description }}</td>
+          <td class="state">
+            {{ task.complete ? "Completada" : "Sin terminar" }}
+            <i *ngIf="!task.complete" (click)="updateTask(task._id)" class="fas fa-check check"></i>
+            <i (click)="deleteTask(task._id)" class="fas fa-trash-alt" title="Eliminar tarea"></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<ng-template #registerModal>
+  <app-modal (handleConfirmationSuccess)="onSubmitNewTask()" [activeLoading]="activeLoading">
+    <form
+        [formGroup]="newTaskForm"
+        (ngSubmit)="onSubmitNewTask()"
+        class="new-task_form"
+        >
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input
+              type="text"
+              id="title"
+              class="form-control"
+              formControlName="title"
+              (change)="validateFields('title')"
+              autofocus
+              />
+        </div>
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <textarea
+              id="description"
+              cols="40"
+              rows="5"
+              maxlength="200"
+              formControlName="description"
+              (change)="validateFields('description')"
+              ></textarea>
+        </div>
+    </form>
+  </app-modal>
+</ng-template>

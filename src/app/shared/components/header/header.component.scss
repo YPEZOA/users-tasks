@@ -4,11 +4,34 @@
   background-color: #00000073;
   font-family: "Poppins", sans-serif;
   height: 100px;
-  a {
-    text-decoration: none;
-    margin-right: 4em;
-    &:hover {
-      text-decoration: underline;
+  box-shadow: 0px 1px 6px #000;
+  .navbar-brand {
+    margin-left: 40px;
+    a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 30px;
     }
   }
+  ul {
+    display: flex;
+    margin: 5px;
+    li {
+      list-style: none;
+      a {
+        text-decoration: none;
+        margin-right: 4em;
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+    .navbar {
+      flex-wrap: nowrap;
+    }
 }

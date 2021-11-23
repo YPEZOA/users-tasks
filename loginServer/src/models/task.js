@@ -5,6 +5,8 @@ const taskSchema = new Schema({
   description: String,
   complete: Boolean,
   user: { type: Schema.Types.ObjectId, ref: 'User' }
+}, {
+    timestamps: true
 })
 
 module.exports = model('Task', taskSchema);
