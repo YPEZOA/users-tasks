@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {AuthServiceService} from 'src/app/services/auth-service.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -45,12 +48,23 @@ export class RegisterComponent implements OnInit {
     this.validateForm();
     this.registerForm.markAllAsTouched();
 
-    const { email, user, password } = this.registerForm.value;
+    const {email, user, password} = this.registerForm.value;
     if (this.formValid) {
-      this.authService
-        .registerUser(email, user, password)
+      this.authService.registerUser(email, user, password)
+        .pipe(
+          catchError((err: HttpErrorResponse) => {
+            Swal.fire({
+              icon: 'error',
+              text: err.error.message,
+              showConfirmButton: false,
+              backdrop: false,
+              timer: 2000
+            })
+            return throwError(err)
+          })
+        )
         .subscribe((resp: any) => {
-          if (resp.status === 1) {
+          if (resp.ok) {
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -59,7 +73,7 @@ export class RegisterComponent implements OnInit {
               showConfirmButton: false,
             });
             resp.userData ? (this.userData = resp.userData) : null;
-            this.router.navigate(['/auth/profile']);
+            this.router.navigate(['/auth/tasks']);
             sessionStorage.setItem('token', resp.token);
             sessionStorage.setItem('userData', JSON.stringify(this.userData));
           } else {

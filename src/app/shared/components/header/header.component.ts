@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,8 +6,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   @Input() userData!: any;
+  @Input() backToTasks!: any;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+  public logout(event: any): void {
+    sessionStorage.clear();
+  }
 }

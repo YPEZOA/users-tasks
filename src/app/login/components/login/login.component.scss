@@ -1,8 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;500&family=Poppins:wght@300&display=swap");
 .form-container {
   font-family: "Poppins", sans-serif;
-  padding-top: 5em;
-  .form-title {
+  .loader {
+    color: #fff;
+    font-weight: 900;
+    margin-top: 7em;
+  }
+  .login-title {
+    width: 95%;
     font-weight: 900;
   }
   .form-control {
@@ -14,36 +19,61 @@
   .register {
     font-size: 13px;
     text-decoration: none;
-    color: #f2f2f2;
+    color: #fff;
     &:hover {
       text-decoration: underline;
     }
   }
   text-align: center;
   form {
-    background-color: #f2f2f2;
-    border: 2px solid #cccc;
+    background-color: #0f7e9fa6;
+    color: #fff;
     border-radius: 15px;
     padding: 40px;
     padding-top: 5em;
     padding-bottom: 5em;
     width: 20%;
     margin: auto;
+    .form-control {
+      color: #fff;
+      background-color: transparent !important;
+      &:focus {
+        background-color: transparent !important;
+      }
+      &::placeholder {
+        color: #cccc;
+      }
+    }
     .data {
-      background-color: #f2f2f2;
       border-radius: 0;
       border: none;
       border-bottom: 2px solid #cccc;
-      color: grey;
       margin-bottom: 15px;
       font-size: 16px;
-      &:focus {
-        border-color: lightblue;
-      }
     }
   }
   .btn {
     width: 100%;
     color: #fff;
+    background-color: #39374f;
+    &:hover {
+      background-color: #444c72;
+    }
   }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  .form-container {
+    form {
+      width: 30%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+    .form-container {
+      form {
+        width: 80%;
+      }
+    }
 }

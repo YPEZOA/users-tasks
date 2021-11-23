@@ -1,9 +1,10 @@
 <div class="form-container">
-  <form [formGroup]="form" autocomplete="off">
-    <img src="../../../../assets/images/icon-task.png" alt="task" class="icon-tasks"><h1 class="login-title mb-4">Mis tareas</h1>
-    <input type="text" name="" placeholder="Usuario" class="form-control data" autocomplete="off" formControlName='user'>
-    <input type="password" name="" placeholder="contraseña" class="form-control data mt-2" autocomplete="off" formControlName='password'>
-    <button type="submit" class="btn btn-primary btn-block mt-4" (click)="onSubmitForm($event)">Ingresar</button>
+  <h1 class="loader" *ngIf="showLoading"><i class="fas fa-spinner fa-spin"></i> Cargando...</h1>
+  <form [formGroup]="form" autocomplete="off" *ngIf="!showLoading">
+    <h1 class="login-title mb-4">MIS TAREAS</h1>
+    <input type="text" name="" placeholder="Usuario" class="form-control data" formControlName='user'>
+    <input type="password" name="" placeholder="contraseña" class="form-control data mt-2" formControlName='password'>
+    <button type="submit" class="btn btn-block mt-4" (click)="onSubmitForm($event)">Ingresar</button>
   </form>
-  <a [routerLink]="['/auth/register']" class="register">¿Aún no te registras? ingresa aquí</a>
+  <a [routerLink]="['/auth/register']" class="register" *ngIf="!showLoading">¿Aún no te registras? ingresa aquí</a>
 </div>
