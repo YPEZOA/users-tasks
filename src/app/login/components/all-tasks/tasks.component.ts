@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthServiceService} from 'src/app/services/auth-service.service';
-import {TaskService} from 'src/app/services/task.service';
-import {ITask} from '../../interfaces/task.interface';
+import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { TaskService } from 'src/app/services/task.service';
+import { ITask } from '../../interfaces/task.interface';
 
 @Component({
   selector: 'app-tasks',
@@ -13,7 +13,10 @@ export class TasksComponent implements OnInit {
   tasks!: ITask[];
   tasksUser!: string;
 
-  constructor(private taskService: TaskService, private authService: AuthServiceService) {}
+  constructor(
+    private taskService: TaskService,
+    private authService: AuthServiceService
+  ) {}
 
   ngOnInit(): void {
     this.getUserData();
@@ -22,18 +25,20 @@ export class TasksComponent implements OnInit {
 
   getUserData(): void {
     const data = JSON.parse(sessionStorage.getItem('userData') || '');
-    this.authService.getUserDataById(data._id || data.userId).subscribe(resp => {
-      if (resp.ok) {
-        this.userData = resp.user
-      } else {
-        console.error('Algo a ocurrido')
-      }
-    })
+    this.authService
+      .getUserDataById(data._id || data.userId)
+      .subscribe((resp) => {
+        if (resp.ok) {
+          this.userData = resp.user;
+        } else {
+          console.error('Algo a ocurrido');
+        }
+      });
   }
 
   getAllTasks(): void {
-    this.taskService.getTasks().subscribe(resp => {
-      this.tasks = resp.tasks
-    })
+    this.taskService.getTasks().subscribe((resp) => {
+      this.tasks = resp.tasks;
+    });
   }
 }
