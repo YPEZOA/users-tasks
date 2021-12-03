@@ -1,6 +1,7 @@
 # LoginApp
 - Clone or download this repo
 - Run npm install or yarn install
+- Download users-tasks-back - npm or yarn install - Run node src/index.js
 - In loginServer folder run node or nodemon src/index.js
 - Run ng serve to run app
 
